@@ -1,0 +1,366 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="adminmaster.master.cs" Inherits="admin_adminmaster" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us">
+<head runat="server">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta name="theme-color" content="#3e454c" />
+
+    <title>School App | Admin</title>
+
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <!-- Sandstone Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- Bootstrap Datatables -->
+    <link rel="stylesheet" href="css/dataTables.bootstrap.min.css" />
+    <!-- Bootstrap social button library -->
+    <link rel="stylesheet" href="css/bootstrap-social.css" />
+    <!-- Bootstrap select -->
+    <link rel="stylesheet" href="css/bootstrap-select.css" />
+    <!-- Bootstrap file input -->
+    <link rel="stylesheet" href="css/fileinput.min.css" />
+    <!-- Awesome Bootstrap checkbox -->
+    <link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css" />
+    <!-- Admin Stye -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="brand clearfix">
+            <a href="#" class="logo">
+                <img src="img/logo.jpg" class="img-responsive" alt=""></a>
+            <span class="menu-btn"><i class="fa fa-bars"></i></span>
+            <ul class="ts-profile-nav">
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Settings</a></li>
+                <li class="ts-account">
+                    <a href="#">
+                        <img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt="">
+                        <asp:Label ID="lblsess" runat="server" Text=""></asp:Label>
+                        <i class="fa fa-angle-down hidden-side"></i></a>
+                    <ul>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Edit Account</a></li>
+                        <li>
+                            <asp:LinkButton ID="lnkSignout" runat="server" Text="Signout" OnClick="lnkSignout_Click"></asp:LinkButton></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <asp:MultiView ID="MultiView1" runat="server" ValidateRequestMode="Inherit">
+            <asp:View ID="View1" runat="server">
+                <div class="ts-main-content">
+                    <nav class="ts-sidebar">
+                        <ul class="ts-sidebar-menu">
+                            <li class="ts-label">
+                                <asp:Label ID="lblWel" runat="server" Text="Welcome"></asp:Label>
+                                <%--<li>--%>
+                                <asp:Label runat="server" ID="lblsessmas" Text="" ForeColor="WhiteSmoke"></asp:Label></li>
+                            <%--<input type="text" class="ts-sidebar-search" placeholder="Search here...">--%>
+                            <%--</li>--%>
+                            <li class="ts-label">Main</li>
+                            <li class="open"><a href="#"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+
+                            <li><a href="#"><i class="fa fa-child"></i>Manage Admissions</a>
+                                <ul>
+                                    <li><a href="NewAdmission.aspx">New Admission</a></li>
+                                    <li><a href="StudentProfile.aspx">View Student Profile</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="fa fa-creative-commons"></i>Manage Classes</a>
+                                <ul>
+                                    <li><a href="AddClass.aspx">Manage Class</a></li>
+                                    <li><a href="ViewClass.aspx">View Class</a></li>
+                                    <li><a href="#">Manage Subjects</a>
+                                        <ul>
+                                            <li><a href="AddSubject.aspx">Add Subject</a></li>
+                                            <li><a href="ManageSubjects.aspx">Manage Subject</a></li>
+                                            <li><a href="TeacherSubjects.aspx">Teacher Course Load</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="fa fa-money"></i>Manage Fees</a>
+                                <ul>
+                                    <li><a href="Registrationfee.aspx">Fee</a></li>
+                                    <%--<li><a href="#">Monthly</a></li>--%>
+                                    <%--<li><a href="#">Yearly</a></li>--%>
+                                    <li><a href="#">Manage Fee types and Amount</a>
+                                        <ul>
+                                            <li><a href="Addfees.aspx">Add / Manage fees</a></li>
+                                            <%--<li><a href="#">B</a></li>--%>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="fa fa-group"></i>Manage Staff</a>
+                                <ul>
+                                    <li><a href="AddTeacher.aspx">Add Teacher</a></li>
+                                    <li><a href="LoginCredentials.aspx">Create Logins </a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="fa fa-user"></i>Manage Accounts</a>
+                                <ul>
+                                    <li><a href="#">A</a></li>
+                                    <li><a href="#">B</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Account from above -->
+                            <ul class="ts-profile-nav">
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Settings</a></li>
+                                <li class="ts-account">
+                                    <a href="#">
+                                        <img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt="">
+                                        Account <i class="fa fa-angle-down hidden-side"></i></a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ul>
+                                        <li><a href="#">My Account</a></li>
+                                        <li><a href="#">Edit Account</a></li>
+                                        <li><a href="#">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </ul>
+                    </nav>
+                    <div class="content-wrapper">
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <h2 class="page-title">Admin Dashboard</h2>
+                                    <asp:ContentPlaceHolder ID="cpadmin" runat="server">
+                                    </asp:ContentPlaceHolder>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </asp:View>
+
+            <asp:View ID="View2" runat="server">
+
+                <div class="ts-main-content">
+                    <nav class="ts-sidebar">
+                        <ul class="ts-sidebar-menu">
+                            <li class="ts-label">
+                                <asp:Label ID="Label1" runat="server" Text="Welcome"></asp:Label>
+                                <%--<li>--%>
+                                <asp:Label runat="server" ID="Lblsessmas2" Text="" ForeColor="WhiteSmoke"></asp:Label></li>
+                            <li class="ts-label">Main</li>
+                            <li class="open"><a href="index.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                            <li><a href="#"><i class="fa fa-desktop"></i>UI Elements</a>
+                                <ul>
+                                    <li><a href="#">Panels and Wells</a></li>
+                                    <li><a href="#">Buttons</a></li>
+                                    <li><a href="#">Notifications</a></li>
+                                    <li><a href="#">Typography</a></li>
+                                    <li><a href="#">Icon</a></li>
+                                    <li><a href="#">Grid</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="fa fa-table"></i>Tables</a></li>
+                            <li><a href="#"><i class="fa fa-edit"></i>Forms</a></li>
+                            <li><a href="#"><i class="fa fa-pie-chart"></i>Charts</a></li>
+                            <li><a href="#"><i class="fa fa-sitemap"></i>Multi-Level Dropdown</a>
+                                <ul>
+                                    <li><a href="#">2nd level</a></li>
+                                    <li><a href="#">2nd level</a></li>
+                                    <li><a href="#">3rd level</a>
+                                        <ul>
+                                            <li><a href="#">3rd level</a></li>
+                                            <li><a href="#">3rd level</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="fa fa-files-o"></i>Sample Pages</a>
+                                <ul>
+                                    <li><a href="#">Blank page</a></li>
+                                    <li><a href="#">Login page</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Account from above -->
+                            <ul class="ts-profile-nav">
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Settings</a></li>
+                                <li class="ts-account">
+                                    <a href="#">
+                                        <img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt="">
+                                        Account <i class="fa fa-angle-down hidden-side"></i></a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ul>
+                                        <li><a href="#">My Account</a></li>
+                                        <li><a href="#">Edit Account</a></li>
+                                        <li><a href="#">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </ul>
+                    </nav>
+                    <div class="content-wrapper">
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <h2 class="page-title">Accountant Dashboard</h2>
+
+
+
+
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <%--</asp:Panel>--%>
+            </asp:View>
+            <asp:View ID="View3" runat="server">
+                <div class="ts-main-content">
+                    <nav class="ts-sidebar">
+                        <ul class="ts-sidebar-menu">
+                            <li class="ts-label">
+                                <asp:Label ID="Label2" runat="server" Text="Welcome"></asp:Label>
+                                <%--<li>--%>
+                                <asp:Label runat="server" ID="lblsessmas3" Text="" ForeColor="WhiteSmoke"></asp:Label></li>
+                            <li class="ts-label">Main</li>
+                            <li class="open"><a href="index.html"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+                            <li><a href="#"><i class="fa fa-desktop"></i>UI Elements</a>
+                                <ul>
+                                    <li><a href="#">Panels and Wells</a></li>
+                                    <li><a href="#">Buttons</a></li>
+                                    <li><a href="#">Notifications</a></li>
+                                    <li><a href="#">Typography</a></li>
+                                    <li><a href="#">Icon</a></li>
+                                    <li><a href="#">Grid</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="fa fa-table"></i>Tables</a></li>
+                            <li><a href="#"><i class="fa fa-edit"></i>Forms</a></li>
+                            <li><a href="#"><i class="fa fa-pie-chart"></i>Charts</a></li>
+                            <li><a href="#"><i class="fa fa-sitemap"></i>Multi-Level Dropdown</a>
+                                <ul>
+                                    <li><a href="#">2nd level</a></li>
+                                    <li><a href="#">2nd level</a></li>
+                                    <li><a href="#">3rd level</a>
+                                        <ul>
+                                            <li><a href="#">3rd level</a></li>
+                                            <li><a href="#">3rd level</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="#"><i class="fa fa-files-o"></i>Sample Pages</a>
+                                <ul>
+                                    <li><a href="#">Blank page</a></li>
+                                    <li><a href="#">Login page</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- Account from above -->
+                            <ul class="ts-profile-nav">
+                                <li><a href="#">Help</a></li>
+                                <li><a href="#">Settings</a></li>
+                                <li class="ts-account">
+                                    <a href="#">
+                                        <img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt="">
+                                        Account <i class="fa fa-angle-down hidden-side"></i></a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<ul>
+                                        <li><a href="#">My Account</a></li>
+                                        <li><a href="#">Edit Account</a></li>
+                                        <li><a href="#">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </ul>
+                    </nav>
+                    <div class="content-wrapper">
+                        <div class="container-fluid">
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <h2 class="page-title">Teacher Dashboard</h2>
+
+
+
+
+
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </asp:View>
+        </asp:MultiView>
+
+
+
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+
+        <!-- Loading Scripts -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap-select.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.dataTables.min.js"></script>
+        <script src="js/dataTables.bootstrap.min.js"></script>
+        <script src="js/Chart.min.js"></script>
+        <script src="js/fileinput.js"></script>
+        <script src="js/chartData.js"></script>
+        <script src="js/main.js"></script>
+
+        <%--<script>
+		
+	window.onload = function(){
+    
+		// Line chart from swirlData for dashReport
+		var ctx = document.getElementById("dashReport").getContext("2d");
+		window.myLine = new Chart(ctx).Line(swirlData, {
+			responsive: true,
+			scaleShowVerticalLines: false,
+			scaleBeginAtZero : true,
+			multiTooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>",
+		}); 
+		
+		// Pie Chart from doughutData
+		var doctx = document.getElementById("chart-area3").getContext("2d");
+		window.myDoughnut = new Chart(doctx).Pie(doughnutData, {responsive : true});
+
+		// Dougnut Chart from doughnutData
+		var doctx = document.getElementById("chart-area4").getContext("2d");
+		window.myDoughnut = new Chart(doctx).Doughnut(doughnutData, {responsive : true});
+
+	}
+	</script>--%>
+    </form>
+</body>
+</html>
